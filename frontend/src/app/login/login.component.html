@@ -1,0 +1,14 @@
+<h1>LOGIN</h1>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" name="username" ngModel required>
+  </mat-form-field>
+  <div></div>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="text" name="password" ngModel required>
+  </mat-form-field>
+  <div></div>
+  <button mat-raised-button color="primary" type="submit">Login</button>
+</form>
