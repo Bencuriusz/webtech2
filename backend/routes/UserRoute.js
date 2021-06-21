@@ -25,14 +25,28 @@ UserRoute.route('/').get((req, res) => {
         }
     })
 })
-User.find({ $username: { $search: "java coffee shop" } })
+
 //GET ONE
 UserRoute.route('/read/:username').get((req, res) => {
-    User.findById(req.params.username, (error, data) => {
+    User.find({ "username": req.params.username }, (error, data) => {
         if (error) {
             return next(error)
         } else {
             res.json(data)
+        }
+    })
+})
+
+//LOGIN
+UserRoute.route('/login').post((req, res) => {
+    User.find({ $and: [{ "username": req.body.username }, { "password": req.body.password }] }, (error, data) => {
+        if (error) {
+            return next(error)
+        } else if (data.length) {
+            res.json(data)
+        }
+        else {
+            res.status(401).send();
         }
     })
 })

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.ApiService.get(form.value.username)
+    this.ApiService.login(form.value.username, form.value.password)
       .subscribe(
         response => {
           console.log(response);

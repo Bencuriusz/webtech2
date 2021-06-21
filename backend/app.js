@@ -36,7 +36,7 @@ const UserRoute = require('../backend/routes/UserRoute')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-	extended: false
+	extended: true
 }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
