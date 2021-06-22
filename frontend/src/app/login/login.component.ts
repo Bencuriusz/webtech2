@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private ApiService: ApiService) { }
+  constructor(private ApiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.router.navigate(["/bookstore"]);
         },
         error => {
           console.log(error);

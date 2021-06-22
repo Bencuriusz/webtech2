@@ -1,3 +1,4 @@
+import { BookstoreComponent } from './bookstore/bookstore.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -12,13 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookstoreComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatInputModule,
     HttpClientModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

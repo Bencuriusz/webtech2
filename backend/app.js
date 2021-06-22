@@ -32,7 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const UserRoute = require('../backend/routes/UserRoute')
+const UserRoute = require('../backend/routes/UserRoute');
+const BookRoute = require('./routes/BookRoute.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -41,7 +42,8 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
-app.use('/api', UserRoute)
+app.use('/api', UserRoute);
+app.use('/api', BookRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

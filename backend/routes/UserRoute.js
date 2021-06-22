@@ -4,19 +4,8 @@ const UserRoute = express.Router();
 
 let User = require('../models/User');
 
-//CREATE
-UserRoute.route('/create').post((req, res, next) => {
-    User.create(req.body, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
-    })
-});
-
 //GET ALL
-UserRoute.route('/').get((req, res) => {
+UserRoute.route('/getalluser').get((req, res) => {
     User.find((error, data) => {
         if (error) {
             return next(error)
@@ -27,7 +16,7 @@ UserRoute.route('/').get((req, res) => {
 })
 
 //GET ONE
-UserRoute.route('/read/:username').get((req, res) => {
+UserRoute.route('/readuser/:username').get((req, res) => {
     User.find({ "username": req.params.username }, (error, data) => {
         if (error) {
             return next(error)
@@ -51,8 +40,27 @@ UserRoute.route('/login').post((req, res) => {
     })
 })
 
+//REGISTER
+UserRoute.route('/register').post((req, res, next) => {
+    User.find({ "username": req.body.username }, (error, data) => {
+        if (error) {
+            return next(error)
+        } else if (data.length) {
+            return next("user already exists")
+        } else {
+            User.create(req.body, (error, data) => {
+                if (error) {
+                    return next(error)
+                } else {
+                    res.json(data)
+                }
+            })
+        }
+    })
+});
+
 //DELETE
-UserRoute.route('/delete/:id').delete((req, res, next) => {
+UserRoute.route('/deleteuser/:id').delete((req, res, next) => {
     User.findOneAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
