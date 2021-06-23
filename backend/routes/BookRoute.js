@@ -32,7 +32,7 @@ BookRoute.route('/createbook').post((req, res, next) => {
         if (error) {
             return next(error)
         } else if (data.length) {
-            return next("Book already exists")
+            return res.status(400).send("Book already exists")
         } else {
             Book.create(req.body, (error, data) => {
                 if (error) {

@@ -1,58 +1,71 @@
-<mat-accordion>
-  Available books:
-  <div *ngFor="let book of books">
-    <div [ngSwitch]="modify">
-      <mat-expansion-panel *ngSwitchCase="false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Cím: {{book.title}}
-          </mat-panel-title>
-          <mat-panel-description>
-            Szerző: {{book.author}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>Leírás: {{book.description}}</p>
-        <button mat-raised-button color="primary" (click)="Edit(book)">Edit</button>
-        <button mat-raised-button color="secondary" (click)="Delete(book)">Delete</button>
-      </mat-expansion-panel>
+Available books:
+<div *ngFor="let book of books">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Cím: {{book.title}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Szerző: {{book.author}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Leírás: {{book.description}}</p>
+    <div *ngIf="condition == book._id; then thenBlock else elseBlock"></div>
+    <button mat-raised-button color="primary" (click)="Edit(book)">Edit</button>
+    <button mat-raised-button color="secondary" (click)="Delete(book)">Delete</button>
+  </mat-expansion-panel>
+</div>
 
-      <mat-expansion-panel *ngSwitchCase="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            asd
-          </mat-panel-title>
-          <mat-panel-description>
-            asd
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>asd</p>
-      </mat-expansion-panel>
-    </div>
-  </div>
 
-  <div>
-    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-      <mat-form-field appearance="fill">
-        <mat-label>Title</mat-label>
-        <input matInput type="text" name="title" ngModel required #title="ngModel">
-        <mat-error *ngIf="title.invalid">Please enter a title</mat-error>
-      </mat-form-field>
-      <div></div>
-      <mat-form-field appearance="fill">
-        <mat-label>Author</mat-label>
-        <input matInput type="text" name="author" ngModel required #author="ngModel">
-        <mat-error *ngIf="author.invalid">Please enter an author</mat-error>
-      </mat-form-field>
-      <div></div>
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea matInput type="text" name="description" ngModel required #description="ngModel"></textarea>
-        <mat-error *ngIf="description.invalid">Please enter a description</mat-error>
-      </mat-form-field>
-      <div></div>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Add</button>
-    </form>
+<ng-template #elseBlock>
 
-  </div>
+</ng-template>
+<ng-template #thenBlock>
+  <form (ngSubmit)="onUpdate(form)" #form="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" name="title" ngModel required #title="ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a title</mat-error>
+    </mat-form-field>
+    <div></div>
+    <mat-form-field appearance="fill">
+      <mat-label>Author</mat-label>
+      <input matInput type="text" name="author" ngModel required #author="ngModel">
+      <mat-error *ngIf="author.invalid">Please enter an author</mat-error>
+    </mat-form-field>
+    <div></div>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" name="description" ngModel required #description="ngModel"></textarea>
+      <mat-error *ngIf="description.invalid">Please enter a description</mat-error>
+    </mat-form-field>
+    <div></div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Modify</button>
+  </form>
+</ng-template>
 
-</mat-accordion>
+
+
+<div>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" name="title" ngModel required #title="ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a title</mat-error>
+    </mat-form-field>
+    <div></div>
+    <mat-form-field appearance="fill">
+      <mat-label>Author</mat-label>
+      <input matInput type="text" name="author" ngModel required #author="ngModel">
+      <mat-error *ngIf="author.invalid">Please enter an author</mat-error>
+    </mat-form-field>
+    <div></div>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput type="text" name="description" ngModel required #description="ngModel"></textarea>
+      <mat-error *ngIf="description.invalid">Please enter a description</mat-error>
+    </mat-form-field>
+    <div></div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Add</button>
+  </form>
+</div>

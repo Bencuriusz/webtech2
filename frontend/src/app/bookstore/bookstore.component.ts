@@ -8,13 +8,15 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['bookstore.component.css']
 })
 export class BookstoreComponent implements OnInit {
-  book: any;
   constructor(private ApiService: ApiService) { }
 
   books: any[] = [];
-  modify = false;
+  condition;
 
   ngOnInit(): void {
+    this.getBooks();
+  }
+  getBooks() {
     this.ApiService.getAllBook().subscribe(
       response => {
         console.log(response);
@@ -41,9 +43,20 @@ export class BookstoreComponent implements OnInit {
         });
   }
 
+  onUpdate(form: NgForm) {
+    this.ApiService.editBook(form.value.title, form.value.author, form.value.description, this.condition)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.getBooks();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   Edit(book) {
-    this.modify = true;
-    book._id
+    this.condition = book._id;
   }
 
   Delete(book) {

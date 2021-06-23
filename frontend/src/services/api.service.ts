@@ -50,7 +50,7 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/getallbook`);
   }
 
-  createBook(title: string, author: string, description) {
+  createBook(title: string, author: string, description: string) {
     let body = new URLSearchParams();
     body.set('title', title);
     body.set('author', author);
@@ -63,8 +63,17 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/createbook`, body.toString(), options)
   }
 
-  editBook() {
+  editBook(title: string, author: string, description: string, id: string) {
+    let body = new URLSearchParams();
+    body.set('title', title);
+    body.set('author', author);
+    body.set('description', description);
 
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.put(`${this.baseUrl}/updatebook/${id}`, body.toString(), options)
   }
 
   deleteBook(id): Observable<any> {
