@@ -8,11 +8,11 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['bookstore.component.css']
 })
 export class BookstoreComponent implements OnInit {
+  book: any;
   constructor(private ApiService: ApiService) { }
 
-
-  panelOpenState = false;
-  books: any[][] = [];
+  books: any[] = [];
+  modify = false;
 
   ngOnInit(): void {
     this.ApiService.getAllBook().subscribe(
@@ -21,6 +21,7 @@ export class BookstoreComponent implements OnInit {
         for (let i = 0; i < response.length; i++) {
           this.books[i] = response[i];
         }
+        console.log(this.books);
       },
       error => {
         console.log(error);
@@ -28,6 +29,32 @@ export class BookstoreComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form.value);
+    this.ApiService.createBook(form.value.title, form.value.author, form.value.description)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.books.push(response);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
+  Edit(book) {
+    this.modify = true;
+    book._id
+  }
+
+  Delete(book) {
+    this.ApiService.deleteBook(book._id).
+      subscribe(
+        response => {
+          console.log(response);
+          this.books.splice(this.books.indexOf(book), 1)
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

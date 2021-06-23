@@ -1,17 +1,33 @@
 <mat-accordion>
   Available books:
   <div *ngFor="let book of books">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{book}}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{book}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>{{book}}</p>
-    </mat-expansion-panel>
+    <div [ngSwitch]="modify">
+      <mat-expansion-panel *ngSwitchCase="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cím: {{book.title}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Szerző: {{book.author}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Leírás: {{book.description}}</p>
+        <button mat-raised-button color="primary" (click)="Edit(book)">Edit</button>
+        <button mat-raised-button color="secondary" (click)="Delete(book)">Delete</button>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngSwitchCase="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            asd
+          </mat-panel-title>
+          <mat-panel-description>
+            asd
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>asd</p>
+      </mat-expansion-panel>
+    </div>
   </div>
 
   <div>

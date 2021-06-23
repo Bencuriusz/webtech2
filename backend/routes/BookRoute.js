@@ -47,13 +47,24 @@ BookRoute.route('/createbook').post((req, res, next) => {
 
 //DELETE
 BookRoute.route('/deletebook/:id').delete((req, res, next) => {
-    Book.findOneAndRemove(req.params.id, (error, data) => {
+    Book.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {
             res.status(200).json({
                 msg: data
             })
+        }
+    })
+})
+
+// UPDATE
+BookRoute.route('/updatebook/:id').put((req, res, next) => {
+    Book.findByIdAndUpdate(req.params.id, { $set: req.body }, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data)
         }
     })
 })

@@ -1,19 +1,17 @@
-<p>
-  <mat-toolbar>
-    <span>
-      <button mat-raised-button color="primary" routerLink="/register" routerLinkActive="active">Register Page</button>
-    </span>
+<mat-toolbar color="accent">
+  <span class="gap">
+    <button mat-raised-button color="primary" routerLink="/register" routerLinkActive="active">Register
+      Page</button>
+  </span>
 
-    <span>
-      <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active">Login Page</button>
-    </span>
+  <span class="gap">
+    <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active">Login Page</button>
+  </span>
 
-    <span>
-      <button mat-raised-button color="primary" routerLink="/bookstore" routerLinkActive="active">Bookstore
-        Page</button>
-    </span>
-  </mat-toolbar>
-</p>
+  <span class="gap">
+    <button mat-raised-button color="primary" routerLink="/bookstore" routerLinkActive="active">Bookstore
+      Page</button>
+  </span>
+</mat-toolbar>
 
-<h1>App component</h1>
 <router-outlet></router-outlet>
